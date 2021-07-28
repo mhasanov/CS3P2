@@ -50,17 +50,18 @@ public class Chess {
     }
 
     /**
-     * Prints the tree, uses prre-order traversal
+     * Prints the tree, uses pre-order traversal
      * 
      * @param startingState The Starting State
      */
     private static void printTree(String depthLimit) {
         int depth = Integer.parseInt(depthLimit);
-        System.out.println(root.getState() + "fitness: 0");
-        printTreeHelper(root, depth-1);
+        depth++;
+        System.out.println(root.getState() + " fitness: 0");
+        printTreeHelper(root, depth-1, "", 0);
     }
 
-    public static void printTreeHelper(ChessTreeNode node, int depth){
+    public static void printTreeHelper(ChessTreeNode node, int depth, String prefix, int fitnessCary){
 
         if(depth <= 0) {
             return;
@@ -69,24 +70,20 @@ public class Chess {
         String[] childrenStrings = ChessFaker.getNextMoves(node.getState());
         ChessTreeNode[] children = new ChessTreeNode[childrenStrings.length];
         for(int i = 0; i < childrenStrings.length; i++) {
-            children[i] = new ChessTreeNode(childrenStrings[i]);
+            children[i] = new ChessTreeNode(ChessFaker.getNextBoard(node.getState(), childrenStrings[i]));
         }
         root.setChildren(children);
         String[] moves = ChessFaker.getNextMoves(node.getState());
         
         
         for(int index = 0; index < moves.length; index++) {
-            System.out.println("+ " + moves[index] + " = " + children[index].getState() + " ");
-            
-            printTreeHelper(children[index], depth-1);
-            
-            System.out.print("fitness: " + ChessFaker.getFitnessChange(node.getState(), moves[index]));
+
+            int newFitnessCary = fitnessCary + ChessFaker.getFitnessChange(node.getState(), moves[index]);
+            System.out.print(prefix + "+ " + moves[index] + " = " + children[index].getState() + " ");
+            System.out.println("fitness: " + newFitnessCary);
+            String newPrefix = prefix + "+ " + moves[index] + " ";
+            printTreeHelper(children[index], depth-1, newPrefix, newFitnessCary);
         }
-        
-        //----------
-        //node          V
-        //children      V
-        //moves         V
         
     }
     
