@@ -153,13 +153,37 @@ public class Chess {
      * Finds the state with over 200 fitness in the fewest moves
      */
     private static void bfsToWin() {
-        // this will be implemented later
+        ArrayQueue<String> brd = new ArrayQueue<String>();
+        ArrayQueue<Integer> fit = new ArrayQueue<Integer>();
+        brd.enqueue(root.getState());
+        fit.enqueue(0);
+        
+        System.out.println("Playing to win from: " + root.getState());
+        long initialTime = System.currentTimeMillis();
+        
+        int fitness;
+        String board;
+        do {
+            fitness = fit.dequeue();
+            board = brd.dequeue();
+            
+            String[] moves = ChessFaker.getNextMoves(board);
+            for(int i = 0; i < moves.length; i++) {
+                brd.enqueue(ChessFaker.getNextBoard(board, moves[i]));
+                fit.enqueue(ChessFaker.getFitnessChange(board, moves[i]));
+            }
+            
+            nodesVisited++;
+        } while(fitness < 200);
+        
+        long finalTime = System.currentTimeMillis();
+        duration = finalTime - initialTime;
+        System.out.println("Win state: " + board);
+        System.out.println("Moves to target: " + movesToTarget);
+        System.out.println("Target Fitness: " + fitness);
+        System.out.println("Nodes Visited: " + nodesVisited);
+        System.out.println("Duration: " + duration);
+        
     }
-
-    // static
-
-    // String[] getNextMoves(String board)
-    // String getNextBoard(String board, String move)
-    // int getFitnessChange(String oldBoard, String move)
 
 }
