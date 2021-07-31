@@ -166,16 +166,16 @@ public class Chess {
         do {
             fitness = fit.dequeue();
             board = brd.dequeue();
-            
+
             String[] moves = ChessFaker.getNextMoves(board);
             for(int i = 0; i < moves.length; i++) {
                 brd.enqueue(ChessFaker.getNextBoard(board, moves[i]));
-                fit.enqueue(ChessFaker.getFitnessChange(board, moves[i]));
+                fit.enqueue(fitness + ChessFaker.getFitnessChange(board, moves[i]));
             }
-            
+
             nodesVisited++;
         } while(fitness < 200);
-        
+                
         long finalTime = System.currentTimeMillis();
         duration = finalTime - initialTime;
         System.out.println("Win state: " + board);
@@ -183,6 +183,7 @@ public class Chess {
         System.out.println("Target Fitness: " + fitness);
         System.out.println("Nodes Visited: " + nodesVisited);
         System.out.println("Duration: " + duration);
+             
         
     }
 
