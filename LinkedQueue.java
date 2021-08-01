@@ -4,6 +4,7 @@
  * dequeue, getFront, and isEmpty.
  *
  * @author Syed Arib Ali
+ * @author Mehdi Hasanov
  * @version 07/28/2021
  * @param <T>
  *            The type of elements contained in the LinkedQueue.

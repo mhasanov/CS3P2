@@ -121,7 +121,7 @@ public class Chess
     {
         // movesToTarget : String
 
-        if (depth <= 0 || found) // found == true for webcat purposes
+        if (depth <= 0 || found)
         {
 
             return;
@@ -137,6 +137,7 @@ public class Chess
         String[] moves = ChessFaker.getNextMoves(node.getState());
 
         ChessTreeNode[] children = new ChessTreeNode[moves.length];
+
         for (int i = 0; i < moves.length; i++)
         {
             children[i] = new ChessTreeNode(
@@ -147,7 +148,7 @@ public class Chess
                 depth - 1,
                 fitness
                     + ChessFaker.getFitnessChange(node.getState(), moves[i]));
-            if (found) // found == true for webcat purposes
+            if (found)
             {
                 movesToTarget = "+ " + moves[i] + " " + movesToTarget;
                 break;
@@ -248,14 +249,14 @@ public class Chess
             fitness = fit.dequeue();
             board = brd.dequeue();
             moveString = mvs.dequeue();
-            
+
             String[] moves = ChessFaker.getNextMoves(board);
             for (int i = 0; i < moves.length; i++)
             {
                 brd.enqueue(ChessFaker.getNextBoard(board, moves[i]));
                 fit.enqueue(
                     fitness + ChessFaker.getFitnessChange(board, moves[i]));
-                mvs.enqueue(moveString + "" + moves[i]);
+                mvs.enqueue(moveString + " + " + moves[i]);
             }
             nodesVisited++;
         }
@@ -263,7 +264,8 @@ public class Chess
         long finalTime = System.currentTimeMillis();
         duration = finalTime - initialTime;
         System.out.println("Win state: " + board);
-        System.out.println("Moves to target: " + moveString);
+        String newString = moveString.substring(3);
+        System.out.println("Moves to target: " + newString);
         System.out.println("Target Fitness: " + fitness);
         System.out.println("Nodes Visited: " + nodesVisited);
         System.out.println("Duration: " + duration);
