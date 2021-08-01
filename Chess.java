@@ -70,6 +70,7 @@ public class Chess
      */
     private static void dfsToTarget(String goalState, String depthLimit)
     {
+
         found = false;
         int depth = Integer.parseInt(depthLimit);
         depth += 2;
@@ -86,7 +87,8 @@ public class Chess
         }
         else
         {
-            System.out.println("Moves to target: " + movesToTarget);
+            String newString = movesToTarget.substring(2);
+            System.out.println("Moves to target: " + newString);
         }
 
         if (targetFitness == 0)
@@ -124,13 +126,13 @@ public class Chess
 
             return;
         }
+        nodesVisited++;
         if (node.getState().equals(goalChessBoard))
         {
             found = true;
             targetFitness = fitness;
             return;
         }
-        nodesVisited++;
 
         String[] moves = ChessFaker.getNextMoves(node.getState());
 
@@ -148,6 +150,7 @@ public class Chess
             if (found) // found == true for webcat purposes
             {
                 movesToTarget = "+ " + moves[i] + " " + movesToTarget;
+                break;
             }
         }
     }
