@@ -28,14 +28,14 @@ public class ChessTest
      */
     public void testMain()
     {
+        String[] args4 = { "Stonewall", "doesNotExist", "2" };
+        chess.main(args4);
         String[] args = { "Stonewall", "2" };
         Chess.main(args);
-        String[] args2 = { "StoneWall", "2", "Wall" };
+        String[] args2 = { "Stonewall", "nzrtmrizzxnv", "2" };
         Chess.main(args2);
-        String[] args3 = { "StoneWall" };
+        String[] args3 = { "impossible" };
         Chess.main(args3);
-        String[] args4 = { "StoneWall" };
-        chess.main(args4);
 
         // testing with zero arguments
         String[] noArgs = {};

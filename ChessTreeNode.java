@@ -1,22 +1,59 @@
+/**
+ * ChessTreeNode will store children nodes and the board state.
+ *
+ * @author Syed Arib Ali
+ * @author Mehdi Hasanov
+ * @version 07/28/2021
+ */
+public class ChessTreeNode
+{
 
-public class ChessTreeNode {
-
-    private String state;
+    private String          state;
     private ChessTreeNode[] children;
-    
-    public ChessTreeNode(String state) {
+
+    /**
+     * Create a new ChessTreeNode object.
+     *
+     * @param state
+     *            The state of the board.
+     */
+    public ChessTreeNode(String state)
+    {
         this.state = state;
     }
-    
-    public String getState() {
+
+
+    /**
+     * Obtains the state of the board.
+     *
+     * @return The state of the board.
+     */
+    public String getState()
+    {
         return state;
     }
-    
-    public ChessTreeNode[] getChildren() {
+
+
+    /**
+     * Obtains the children of the ChessTreeNode.
+     *
+     * @return An array of children of the ChessTreeNode.
+     */
+    public ChessTreeNode[] getChildren()
+    {
         return children;
     }
-    
-    public void setChildren(ChessTreeNode[] children) {
+
+
+    /**
+     * Sets the children of the ChessTreeNode.
+     *
+     * @param children
+     *            Array of ChessTreeNode objects which are the children of the
+     *            current ChessTreeNode.
+     */
+    public void setChildren(ChessTreeNode[] children)
+    {
         this.children = children;
     }
 }

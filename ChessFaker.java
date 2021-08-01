@@ -18,10 +18,10 @@ public class ChessFaker {
 
     /**
      * For a given board state, get every possible valid move
-     * 
+     *
      * @param board
      *            The current board state
-     * 
+     *
      * @return
      *         An array of strings, each being a valid move.
      *         There are always between 1 and 12 moves.
@@ -45,12 +45,12 @@ public class ChessFaker {
 
     /**
      * From a starting board state and planned move, get the next board state
-     * 
+     *
      * @param board
      *            The current current board state
      * @param move
      *            The planned move to make
-     * 
+     *
      * @return
      *         The next board state
      */
@@ -68,12 +68,12 @@ public class ChessFaker {
 
     /**
      * From a starting board state and planned move, calculate change in fitness
-     * 
+     *
      * @param oldBoard
      *            The PREVIOUS board state
      * @param move
      *            The move made to reach the current state
-     * 
+     *
      * @return
      *         The fitness of the CURRENT board
      */
