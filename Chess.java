@@ -232,25 +232,30 @@ public class Chess
     {
         LinkedQueue<String> brd = new LinkedQueue<String>();
         LinkedQueue<Integer> fit = new LinkedQueue<Integer>();
+        LinkedQueue<String> mvs = new LinkedQueue<String>();
         brd.enqueue(root.getState());
         fit.enqueue(0);
+        mvs.enqueue("");
 
         System.out.println("Playing to win from: " + root.getState());
         long initialTime = System.currentTimeMillis();
 
         int fitness;
         String board;
+        String moveString;
         do
         {
             fitness = fit.dequeue();
             board = brd.dequeue();
-
+            moveString = mvs.dequeue();
+            
             String[] moves = ChessFaker.getNextMoves(board);
             for (int i = 0; i < moves.length; i++)
             {
                 brd.enqueue(ChessFaker.getNextBoard(board, moves[i]));
                 fit.enqueue(
                     fitness + ChessFaker.getFitnessChange(board, moves[i]));
+                mvs.enqueue(moveString + "" + moves[i]);
             }
             nodesVisited++;
         }
@@ -258,7 +263,7 @@ public class Chess
         long finalTime = System.currentTimeMillis();
         duration = finalTime - initialTime;
         System.out.println("Win state: " + board);
-        System.out.println("Moves to target: " + movesToTarget);
+        System.out.println("Moves to target: " + moveString);
         System.out.println("Target Fitness: " + fitness);
         System.out.println("Nodes Visited: " + nodesVisited);
         System.out.println("Duration: " + duration);
